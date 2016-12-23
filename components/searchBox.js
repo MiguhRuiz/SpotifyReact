@@ -4,6 +4,7 @@
 import React from 'react'
 
 import SearchCounter from './searchCounter'
+import SearchResult from './searchResult'
 
 import api from '../lib/api'
 
@@ -45,6 +46,30 @@ class SearchBox extends React.Component {
                         tracks={this.state.data.tracks.total}
                     />
                 )}
+                <section className="albums">
+                    <span>Álbumes:</span>
+                    { this.state.data &&
+                        this.state.data.albums.items.length > 0 && (
+                        this.state.data.albums.items.map(
+                            album => {
+                                return <SearchResult
+                                    {...album}
+                                />
+                            })
+                    )}
+                </section>
+                <section className="tracks">
+                    <span>Canciones:</span>
+                    { this.state.data &&
+                    this.state.data.tracks.items.length > 0 && (
+                        this.state.data.tracks.items.map(
+                            track => {
+                                return <SearchResult
+                                    {...track}
+                                />
+                            })
+                    )}
+                </section>
             </div>
         )
     }
