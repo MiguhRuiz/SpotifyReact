@@ -8,8 +8,8 @@
     "dev": "next"
   },
   "repository": {
-    "type": "git",
-    "url": "git+https://github.com/MiguhRuiz/SpotifyReact.git"
+    "url": "git+https://github.com/MiguhRuiz/SpotifyReact.git",
+    "type": "git"
   },
   "author": "Miguh Ruiz <m@miguhruiz.xyz> (https://miguhruiz.xyz)",
   "license": "MIT",
