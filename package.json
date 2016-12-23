@@ -1,0 +1,23 @@
+{
+  "name": "spotify-react",
+  "version": "1.0.0",
+  "description": "An Spotify React application created with educational purposes",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "next"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MiguhRuiz/SpotifyReact.git"
+  },
+  "author": "Miguh Ruiz <m@miguhruiz.xyz> (https://miguhruiz.xyz)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MiguhRuiz/SpotifyReact/issues"
+  },
+  "homepage": "https://github.com/MiguhRuiz/SpotifyReact#readme",
+  "dependencies": {
+    "next": "^1.2.3"
+  }
+}
