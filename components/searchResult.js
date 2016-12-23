@@ -10,7 +10,7 @@ function SearchResult(props) {
             {
                 props.type == 'album' && (
                     <div className={`${props.type}-image`}>
-                        <Link href={`/${props.type}/${props.id}`}>
+                        <Link href={`/${props.type}?q=${props.id}`}>
                             <img src={props.images[0].url} />
                         </Link>
                     </div>
