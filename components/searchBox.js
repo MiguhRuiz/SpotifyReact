@@ -5,8 +5,28 @@ import React from 'react'
 
 import SearchCounter from './searchCounter'
 import SearchResult from './searchResult'
+import TextField from 'material-ui/TextField'
+import { GridList } from 'material-ui/GridList'
 
 import api from '../lib/api'
+
+const styles = {
+    root: {
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'space-around',
+        marginBottom: '2em'
+    },
+    gridList: {
+        display: 'flex',
+        flexWrap: 'nowrap',
+        overflowX: 'auto',
+    },
+    search: {
+        display: 'block',
+        margin: '0 auto'
+    }
+}
 
 class SearchBox extends React.Component {
     constructor(props) {
@@ -34,10 +54,11 @@ class SearchBox extends React.Component {
     render() {
         return(
             <div className="search-logic">
-                <input
+                <TextField
                     id="search-box"
                     type="search"
                     placeholder="Quiero aprender sobre..."
+                    style={styles.search}
                     onKeyPress={this.handleSubmit}
                 />
                 {this.state.data && (
@@ -46,28 +67,35 @@ class SearchBox extends React.Component {
                         tracks={this.state.data.tracks.total}
                     />
                 )}
-                <section className="albums">
-                    <span>Álbumes:</span>
-                    { this.state.data &&
-                        this.state.data.albums.items.length > 0 && (
-                        this.state.data.albums.items.map(
-                            album => {
-                                return <SearchResult
-                                    {...album}
-                                />
-                            })
-                    )}
-                </section>
+                <div className="albums" style={styles.root}>
+
+                        { this.state.data &&
+                            this.state.data.albums.items.length > 0 && (
+                                    <GridList style={styles.gridList} cols={2.2}>
+                                        {
+                                            this.state.data.albums.items.map(
+                                                album => {
+                                                    return (
+                                                        <SearchResult {...album}/>
+                                                    )
+                                                })
+                                        }
+                                    </GridList>
+                        )}
+                </div>
                 <section className="tracks">
-                    <span>Canciones:</span>
                     { this.state.data &&
                     this.state.data.tracks.items.length > 0 && (
-                        this.state.data.tracks.items.map(
-                            track => {
-                                return <SearchResult
-                                    {...track}
-                                />
-                            })
+                        <GridList style={styles.gridList} cols={2.2}>
+                            {
+                                this.state.data.tracks.items.map(
+                                    track => {
+                                        return (
+                                            <SearchResult {...track}/>
+                                        )
+                                    })
+                            }
+                        </GridList>
                     )}
                 </section>
             </div>
