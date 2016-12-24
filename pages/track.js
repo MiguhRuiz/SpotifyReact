@@ -23,7 +23,8 @@ const styles = {
         textAlign: 'center'
     },
     separateChips: {
-        marginRight: '1em'
+        marginRight: '1em',
+        marginBottom: '0.5em'
     }
 }
 
@@ -63,7 +64,7 @@ class Track extends React.Component {
                                     <b className="Track-explicit">EXPLICIT</b>
                                 )
                             }
-                            <div className="Track-extra" style={{display: 'flex', justifyContent: 'center', marginBottom: '1em'}}>
+                            <div className="Track-extra" style={{display: 'flex', justifyContent: 'center', marginBottom: '1em', flexWrap: 'wrap'}}>
                                 <Chip className="Track-author" style={styles.separateChips}>De: {this.state.track.artists[0].name}</Chip>
                                 <Chip className="Track-popularity" style={styles.separateChips}>Popularidad: <b>{this.state.track.popularity}%</b></Chip>
                                 <Chip className="Track-duration" style={styles.separateChips}><b>{ms(this.state.track.duration_ms, {long: true}).split(' ')[0]} minutos aproximadamente</b></Chip>
