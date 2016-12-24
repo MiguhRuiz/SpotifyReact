@@ -19,6 +19,7 @@
   "homepage": "https://github.com/MiguhRuiz/SpotifyReact#readme",
   "dependencies": {
     "isomorphic-fetch": "^2.2.1",
+    "ms": "^0.7.2",
     "next": "^1.2.3"
   }
 }
