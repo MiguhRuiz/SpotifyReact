@@ -21,6 +21,10 @@
     "isomorphic-fetch": "^2.2.1",
     "material-ui": "^0.16.5",
     "ms": "^0.7.2",
-    "next": "^1.2.3"
+    "next": "^1.2.3",
+    "react-redux": "^5.0.1",
+    "react-tap-event-plugin": "^2.0.1",
+    "redux": "^3.6.0",
+    "redux-thunk": "^2.1.0"
   }
 }
