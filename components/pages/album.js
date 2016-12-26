@@ -65,6 +65,7 @@ class AlbumPage extends React.Component {
                                   content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
                             <link rel="stylesheet"
                                   href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css"/>
+                            <title>{`${this.props.album.get('name')} en SpotifyReact`}</title>
                         </Head>
                         <Header />
                         <div className="Album-all" style={styles.columns}>
