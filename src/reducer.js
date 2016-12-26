@@ -12,7 +12,7 @@ const initialState = {
 function searchReducer(state = initialState.search, action = {}) {
     switch (action.type) {
         case 'SET_SEARCH':
-            return state.concat(action.payload)
+            return action.payload
         default:
             return state
     }

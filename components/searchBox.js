@@ -36,7 +36,7 @@ class SearchBox extends React.Component {
         super(props)
 
         this.state = {
-            data: false
+            searchResult: false
         }
 
         this.handleSubmit = this.handleSubmit.bind(this)
@@ -47,11 +47,9 @@ class SearchBox extends React.Component {
             e.blur()
 
             const query = e.value
-            const data = await api.searchAlbum(query)
+            await this.props.actions.setSearch(query)
 
-            this.setState({
-                data
-            })
+            this.setState({ searchResult: true })
         }
     }
     render() {
@@ -64,19 +62,19 @@ class SearchBox extends React.Component {
                     style={styles.search}
                     onKeyPress={this.handleSubmit}
                 />
-                {this.state.data && (
+                {this.state.searchResult && (
                     <SearchCounter
-                        albums={this.state.data.albums.total}
-                        tracks={this.state.data.tracks.total}
+                        albums={this.props.search.albums.total}
+                        tracks={this.props.search.tracks.total}
                     />
                 )}
                 <div className="albums" style={styles.root}>
 
-                        { this.state.data &&
-                            this.state.data.albums.items.length > 0 && (
+                        { this.state.searchResult &&
+                            this.props.search.albums.items.length > 0 && (
                                     <GridList style={styles.gridList} cols={2.2}>
                                         {
-                                            this.state.data.albums.items.map(
+                                            this.props.search.albums.items.map(
                                                 album => {
                                                     return (
                                                         <SearchResult {...album}/>
@@ -87,11 +85,11 @@ class SearchBox extends React.Component {
                         )}
                 </div>
                 <section className="tracks">
-                    { this.state.data &&
-                    this.state.data.tracks.items.length > 0 && (
+                    { this.state.searchResult > 0 &&
+                    this.props.search.tracks.items.length > 0 && (
                         <GridList style={styles.gridList} cols={2.2}>
                             {
-                                this.state.data.tracks.items.map(
+                                this.props.search.tracks.items.map(
                                     track => {
                                         return (
                                             <SearchResult {...track}/>

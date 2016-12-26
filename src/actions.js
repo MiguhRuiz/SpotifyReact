@@ -26,7 +26,7 @@ function setTrack(track) {
 
 function setSearch(query) {
     return async (dispatch) => {
-        const result = api.searchAlbum(query)
+        const result = await api.searchAlbum(query)
         dispatch(search(result))
 
         return result
@@ -35,7 +35,7 @@ function setSearch(query) {
 
 function loadAlbum(id) {
     return async (dispatch) => {
-        const album = api.getAlbum(id)
+        const album = await api.getAlbum(id)
         dispatch(setAlbum(album))
 
         return album
@@ -44,7 +44,7 @@ function loadAlbum(id) {
 
 function loadTrack(id) {
     return async (dispatch) => {
-        const track = api.getTrack(id)
+        const track = await api.getTrack(id)
         dispatch(setTrack(track))
 
         return track
