@@ -12,8 +12,6 @@ import Loading from '../loading'
 import Header from '../header'
 import { CardMedia, CardTitle } from 'material-ui/Card'
 
-import api from '../../lib/api'
-
 import actions from '../../src/actions'
 
 const styles = {
@@ -43,15 +41,14 @@ class AlbumPage extends React.Component {
         super(props)
         this.state = {
             loading: true,
-            id: props.id,
-            album: []
+            id: props.id
         }
     }
     async componentDidMount() {
-        const album = await api.getAlbum(this.state.id)
+        await this.props.actions.loadAlbum(this.state.id)
+
         this.setState({
-            loading: false,
-            album
+            loading: false
         })
     }
     render() {
@@ -73,19 +70,19 @@ class AlbumPage extends React.Component {
                         <div className="Album-all" style={styles.columns}>
                             <CardMedia
                                 className="Album-cover"
-                                overlay={<CardTitle title={this.state.album.name}
-                                                    subtitle={`Por ${this.state.album.artists[0].name}; Popularidad: ${this.state.album.popularity}%`}/>}
+                                overlay={<CardTitle title={this.props.album.name}
+                                                    subtitle={`Por ${this.props.album.artists[0].name}; Popularidad: ${this.props.album.popularity}%`}/>}
                                 style={styles.card}
                             >
                                 <img
-                                    src={this.state.album.images[0].url}
+                                    src={this.props.album.images[0].url}
                                     alt="Album Cover"/>
                             </CardMedia>
                             <div className="Album-details">
                                 <ul className="Album-tracks" style={styles.noDecorationList}>
                                     <h2> Este álbum incluye...</h2>
                                     {
-                                        this.state.album.tracks.items.map(
+                                        this.props.album.tracks.items.map(
                                             track => {
                                                 return (
                                                     <a href={`/track?q=${track.id}`} style={styles.noLinks}>
@@ -110,7 +107,7 @@ class AlbumPage extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        album: state.album
+        album: state.album[0]
     }
 }
 

@@ -5,7 +5,7 @@ import { combineReducers } from 'redux'
 
 const initialState = {
     search: {},
-    album: {},
+    album: [],
     track: {}
 }
 
