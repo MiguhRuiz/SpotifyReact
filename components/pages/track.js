@@ -36,16 +36,14 @@ class TrackPage extends React.Component {
         super(props)
         this.state = {
             loading: true,
-            id: props.id,
-            track: []
+            id: props.id
         }
     }
     async componentDidMount() {
-        const track = await api.getTrack(this.state.id)
+        await this.props.actions.loadTrack(this.state.id)
 
         this.setState({
-            loading: false,
-            track
+            loading: false
         })
     }
     render() {
@@ -61,26 +59,26 @@ class TrackPage extends React.Component {
                         </Head>
                         <Header />
                         <Paper zDepth="3">
-                            <h1 className="Track-name" style={styles.textCenter}>{this.state.track.name}</h1>
+                            <h1 className="Track-name" style={styles.textCenter}>{this.props.track.name}</h1>
                             {
-                                this.state.track.explicit && (
+                                this.props.track.explicit && (
                                     <b className="Track-explicit">EXPLICIT</b>
                                 )
                             }
                             <div className="Track-extra" style={{display: 'flex', justifyContent: 'center', marginBottom: '1em', flexWrap: 'wrap'}}>
-                                <Chip className="Track-author" style={styles.separateChips}>De: {this.state.track.artists[0].name}</Chip>
-                                <Chip className="Track-popularity" style={styles.separateChips}>Popularidad: <b>{this.state.track.popularity}%</b></Chip>
-                                <Chip className="Track-duration" style={styles.separateChips}><b>{ms(this.state.track.duration_ms, {long: true}).split(' ')[0]} minutos aproximadamente</b></Chip>
-                                <Chip className="Track-extra" style={styles.separateChips}>N. {this.state.track.track_number} del álbum
-                                    <Link href={`/album?q=${this.state.track.album.id}`}>
-                                        {` ${this.state.track.album.name}`}
+                                <Chip className="Track-author" style={styles.separateChips}>De: {this.props.track.artists[0].name}</Chip>
+                                <Chip className="Track-popularity" style={styles.separateChips}>Popularidad: <b>{this.props.track.popularity}%</b></Chip>
+                                <Chip className="Track-duration" style={styles.separateChips}><b>{ms(this.props.track.duration_ms, {long: true}).split(' ')[0]} minutos aproximadamente</b></Chip>
+                                <Chip className="Track-extra" style={styles.separateChips}>N. {this.props.track.track_number} del álbum
+                                    <Link href={`/album?q=${this.props.track.album.id}`}>
+                                        {` ${this.props.track.album.name}`}
                                     </Link>
                                 </Chip>
                             </div>
                             <audio
                                 className="Track-preview"
                                 controls='controls'
-                                src={this.state.track.preview_url}
+                                src={this.props.track.preview_url}
                                 style={styles.center}
                             />
                         </Paper>
@@ -93,7 +91,7 @@ class TrackPage extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        track: state.track
+        track: state.track[0]
     }
 }
 

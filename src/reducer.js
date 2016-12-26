@@ -6,7 +6,7 @@ import { combineReducers } from 'redux'
 const initialState = {
     search: {},
     album: [],
-    track: {}
+    track: []
 }
 
 function searchReducer(state = initialState.search, action = {}) {
