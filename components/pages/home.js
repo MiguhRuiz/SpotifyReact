@@ -4,14 +4,10 @@
 import React from 'react'
 import Material from 'material-ui/styles/MuiThemeProvider'
 import Head from 'next/head'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 
 import SearchBox from '../searchBox'
 import Paper from 'material-ui/Paper/'
 import Header from '../header'
-
-import actions from '../../src/actions'
 
 const styles = {
     center: {
@@ -40,16 +36,6 @@ class HomePage extends React.Component {
     }
 }
 
-function mapStateToProps(state) {
-    return {
-        search: state.search
-    }
-}
 
-function mapDispatchToProps(dispatch) {
-    return {
-        actions: bindActionCreators(actions, dispatch)
-    }
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomePage)
+export default HomePage

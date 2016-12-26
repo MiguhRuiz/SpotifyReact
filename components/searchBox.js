@@ -2,6 +2,8 @@
  * Created by miguhruiz on 23/12/16.
  */
 import React from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
 import SearchCounter from './searchCounter'
 import SearchResult from './searchResult'
@@ -9,6 +11,7 @@ import TextField from 'material-ui/TextField'
 import { GridList } from 'material-ui/GridList'
 
 import api from '../lib/api'
+import actions from '../src/actions'
 
 const styles = {
     root: {
@@ -103,4 +106,16 @@ class SearchBox extends React.Component {
     }
 }
 
-export default SearchBox
+function mapStateToProps(state) {
+    return {
+        search: state.search
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        actions: bindActionCreators(actions, dispatch)
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SearchBox)
