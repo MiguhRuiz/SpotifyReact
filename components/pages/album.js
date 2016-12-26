@@ -70,19 +70,19 @@ class AlbumPage extends React.Component {
                         <div className="Album-all" style={styles.columns}>
                             <CardMedia
                                 className="Album-cover"
-                                overlay={<CardTitle title={this.props.album.name}
-                                                    subtitle={`Por ${this.props.album.artists[0].name}; Popularidad: ${this.props.album.popularity}%`}/>}
+                                overlay={<CardTitle title={this.props.album.get('name')}
+                                                    subtitle={`Por ${this.props.album.get('artists')[0].name}; Popularidad: ${this.props.album.get('popularity')}%`}/>}
                                 style={styles.card}
                             >
                                 <img
-                                    src={this.props.album.images[0].url}
+                                    src={this.props.album.get('images')[0].url}
                                     alt="Album Cover"/>
                             </CardMedia>
                             <div className="Album-details">
                                 <ul className="Album-tracks" style={styles.noDecorationList}>
                                     <h2> Este álbum incluye...</h2>
                                     {
-                                        this.props.album.tracks.items.map(
+                                        this.props.album.get('tracks').items.map(
                                             track => {
                                                 return (
                                                     <a href={`/track?q=${track.id}`} style={styles.noLinks}>
@@ -105,9 +105,9 @@ class AlbumPage extends React.Component {
     }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state, props) {
     return {
-        album: state.album[0]
+        album: state.get('album').get(props.id)
     }
 }
 

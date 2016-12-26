@@ -64,17 +64,17 @@ class SearchBox extends React.Component {
                 />
                 {this.state.searchResult && (
                     <SearchCounter
-                        albums={this.props.search.albums.total}
-                        tracks={this.props.search.tracks.total}
+                        albums={this.props.search.get('albums').total}
+                        tracks={this.props.search.get('tracks').total}
                     />
                 )}
                 <div className="albums" style={styles.root}>
 
                         { this.state.searchResult &&
-                            this.props.search.albums.items.length > 0 && (
+                            this.props.search.get('albums').items.length > 0 && (
                                     <GridList style={styles.gridList} cols={2.2}>
                                         {
-                                            this.props.search.albums.items.map(
+                                            this.props.search.get('albums').items.map(
                                                 album => {
                                                     return (
                                                         <SearchResult {...album}/>
@@ -86,10 +86,10 @@ class SearchBox extends React.Component {
                 </div>
                 <section className="tracks">
                     { this.state.searchResult > 0 &&
-                    this.props.search.tracks.items.length > 0 && (
+                    this.props.search.get('tracks').items.length > 0 && (
                         <GridList style={styles.gridList} cols={2.2}>
                             {
-                                this.props.search.tracks.items.map(
+                                this.props.search.get('tracks').items.map(
                                     track => {
                                         return (
                                             <SearchResult {...track}/>
@@ -106,7 +106,7 @@ class SearchBox extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        search: state.search
+        search: state.get('search').get('result')
     }
 }
 
