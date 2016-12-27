@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "next",
+    "dev": "eslint . && next",
     "build": "next build",
     "start": "next start"
   },
@@ -25,6 +25,7 @@
     "material-ui": "^0.16.5",
     "ms": "^0.7.2",
     "next": "^2.0.0-beta.2",
+    "react": "^15.4.1",
     "react-redux": "^5.0.1",
     "react-tap-event-plugin": "^2.0.1",
     "redux": "^3.6.0",
@@ -32,5 +33,12 @@
     "redux-immutable": "^3.0.9",
     "redux-logger": "^2.7.4",
     "redux-thunk": "^2.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^3.12.2",
+    "eslint-config-airbnb": "^13.0.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^2.2.3",
+    "eslint-plugin-react": "^6.8.0"
   }
 }

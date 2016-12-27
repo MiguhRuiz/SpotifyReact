@@ -1,21 +1,27 @@
 /**
  * Created by miguhruiz on 23/12/16.
  */
-import React from 'react'
-import { Provider } from 'react-redux'
+import React, { PropTypes } from 'react';
+import { Provider } from 'react-redux';
 
-import AlbumPage from '../components/pages/album'
+import AlbumPage from '../components/pages/album.js';
 
-import store from '../src/store'
+import store from '../src/store';
 
-class Album extends React.Component {
-    render() {
-        return(
-           <Provider store={store}>
-                <AlbumPage id={this.props.url.query.q}/>
-           </Provider>
-        )
-    }
+function Album(props) {
+  return (
+    <Provider store={store}>
+      <AlbumPage id={props.url.query.q} />
+    </Provider>
+  );
 }
 
-export default Album
+Album.propTypes = {
+  url: PropTypes.shape({
+    query: PropTypes.shape({
+      q: PropTypes.string,
+    }),
+  }),
+};
+
+export default Album;

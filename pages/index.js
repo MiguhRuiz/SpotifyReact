@@ -1,21 +1,19 @@
 /**
  * Created by miguhruiz on 23/12/16.
  */
-import React from 'react'
-import { Provider } from 'react-redux'
+import React from 'react';
+import { Provider } from 'react-redux';
 
-import HomePage from '../components/pages/home'
+import HomePage from '../components/pages/home.js';
 
-import store from '../src/store'
+import store from '../src/store';
 
-class HomeSearch extends React.Component {
-    render() {
-        return(
-            <Provider store={store}>
-                <HomePage/>
-            </Provider>
-        )
-    }
+function HomeSearch() {
+  return (
+    <Provider store={store}>
+      <HomePage />
+    </Provider>
+  );
 }
 
-export default HomeSearch
+export default HomeSearch;

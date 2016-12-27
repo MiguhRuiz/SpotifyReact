@@ -1,21 +1,27 @@
 /**
  * Created by miguhruiz on 23/12/16.
  */
-import React from 'react'
-import { Provider } from 'react-redux'
+import React, { PropTypes } from 'react';
+import { Provider } from 'react-redux';
 
-import TrackPage from '../components/pages/track'
+import TrackPage from '../components/pages/track.js';
 
-import store from '../src/store'
+import store from '../src/store';
 
-class Track extends React.Component {
-    render() {
-        return(
-            <Provider store={store}>
-                <TrackPage id={this.props.url.query.q}/>
-            </Provider>
-        )
-    }
+function Track(props) {
+  return (
+    <Provider store={store}>
+      <TrackPage id={props.url.query.q} />
+    </Provider>
+  );
 }
 
-export default Track
+Track.propTypes = {
+  url: PropTypes.shape({
+    query: PropTypes.shape({
+      q: PropTypes.string,
+    }),
+  }),
+};
+
+export default Track;
