@@ -41,7 +41,7 @@ class TrackPage extends React.Component {
   }
   async componentDidMount() {
     await this.props.actions.loadTrack(this.state.id);
-    this.setState({ loading: false, });
+    this.setState({ loading: false });
   }
   render() {
     if (this.state.loading) {

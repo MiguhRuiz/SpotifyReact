@@ -8,20 +8,21 @@ import TrackPage from '../components/pages/track.js';
 
 import store from '../src/store';
 
-function Track(props) {
-  return (
-    <Provider store={store}>
-      <TrackPage id={props.url.query.q} />
-    </Provider>
-  );
+class Track extends React.Component {
+  static async getInitialProps({ query }) {
+    return { query: query.q };
+  }
+  render() {
+    return (
+      <Provider store={store}>
+        <TrackPage id={this.props.query} />
+      </Provider>
+    );
+  }
 }
 
 Track.propTypes = {
-  url: PropTypes.shape({
-    query: PropTypes.shape({
-      q: PropTypes.string,
-    }),
-  }),
+  query: PropTypes.string,
 };
 
 export default Track;

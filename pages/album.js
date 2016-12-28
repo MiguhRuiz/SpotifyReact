@@ -8,20 +8,21 @@ import AlbumPage from '../components/pages/album.js';
 
 import store from '../src/store';
 
-function Album(props) {
-  return (
-    <Provider store={store}>
-      <AlbumPage id={props.url.query.q} />
-    </Provider>
-  );
+class Album extends React.Component {
+  static async getInitialProps({ query }) {
+    return { query: query.q };
+  }
+  render() {
+    return (
+      <Provider store={store}>
+        <AlbumPage id={this.props.query} />
+      </Provider>
+    );
+  }
 }
 
 Album.propTypes = {
-  url: PropTypes.shape({
-    query: PropTypes.shape({
-      q: PropTypes.string,
-    }),
-  }),
+  query: PropTypes.string,
 };
 
 export default Album;

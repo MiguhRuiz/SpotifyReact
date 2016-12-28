@@ -38,7 +38,7 @@ class AlbumPage extends React.Component {
   }
   async componentDidMount() {
     await this.props.actions.loadAlbum(this.state.id);
-    this.setState({ loading: false, });
+    this.setState({ loading: false });
   }
   render() {
     if (this.state.loading) {
