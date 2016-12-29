@@ -9,9 +9,9 @@ import { bindActionCreators } from 'redux';
 import { CardMedia, CardTitle } from 'material-ui/Card';
 import Immutable from 'immutable';
 
-import Loading from '../loading';
-import Header from '../header';
-import TrackBody from '../trackbody';
+import Loading from '../Loading';
+import Header from '../Header';
+import TrackBody from '../TrackBody';
 
 import actions from '../../src/actions';
 

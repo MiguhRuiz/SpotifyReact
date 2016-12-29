@@ -12,8 +12,8 @@ import Paper from 'material-ui/Paper';
 import Chip from 'material-ui/Chip';
 import Immutable from 'immutable';
 
-import Loading from '../loading';
-import Header from '../header';
+import Loading from '../Loading';
+import Header from '../Header';
 
 import actions from '../../src/actions';
 

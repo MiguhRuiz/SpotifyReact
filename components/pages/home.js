@@ -6,8 +6,8 @@ import Material from 'material-ui/styles/MuiThemeProvider';
 import Head from 'next/head';
 import Paper from 'material-ui/Paper/';
 
-import SearchBox from '../searchBox';
-import Header from '../header';
+import SearchBox from '../SearchBox';
+import Header from '../Header';
 
 const styles = {
   center: {

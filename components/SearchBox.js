@@ -8,8 +8,8 @@ import TextField from 'material-ui/TextField';
 import { GridList } from 'material-ui/GridList';
 import Immutable from 'immutable';
 
-import SearchCounter from './searchCounter';
-import SearchResult from './searchResult';
+import SearchCounter from './SearchCounter';
+import SearchResult from './SearchResult';
 import actions from '../src/actions';
 
 const styles = {
