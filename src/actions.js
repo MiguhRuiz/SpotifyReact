@@ -3,59 +3,59 @@
  */
 import api from '../lib/api';
 
-function search(result) {
+function searchAlbum(result) {
   return {
-    type: 'SET_SEARCH',
+    type: 'SET_ALBUM_SEARCH',
     payload: result,
   };
 }
 
-function setAlbum(album) {
+function searchTrack(result) {
   return {
-    type: 'SET_ALBUM',
-    payload: album,
+    type: 'SET_TRACK_SEARCH',
+    payload: result,
   };
 }
 
-function setTrack(track) {
+function albumTracks(tracks) {
   return {
-    type: 'SET_TRACK',
-    payload: track,
+    type: 'SET_ALBUM_TRACKS',
+    payload: tracks,
   };
 }
 
-function setSearch(query) {
+function setSearchAlbum(query) {
   return async (dispatch) => {
     const result = await api.searchAlbum(query);
-    dispatch(search(result));
+    dispatch(searchAlbum(result));
 
     return result;
   };
 }
 
-function loadAlbum(id) {
+function setSearchTrack(query) {
   return async (dispatch) => {
-    const album = await api.getAlbum(id);
-    dispatch(setAlbum(album));
+    const result = await api.searchTrack(query);
+    dispatch(searchTrack(result));
 
-    return album;
+    return result;
   };
 }
 
-function loadTrack(id) {
+function setAlbumTracks(id) {
   return async (dispatch) => {
-    const track = await api.getTrack(id);
-    dispatch(setTrack(track));
+    const result = await api.getAlbumTracks(id);
+    dispatch(albumTracks(result));
 
-    return track;
+    return result;
   };
 }
 
 export default {
-  search,
-  setAlbum,
-  setTrack,
-  setSearch,
-  loadAlbum,
-  loadTrack,
+  searchAlbum,
+  searchTrack,
+  albumTracks,
+  setSearchAlbum,
+  setAlbumTracks,
+  setSearchTrack,
 };

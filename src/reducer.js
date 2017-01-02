@@ -8,33 +8,87 @@ import {
 } from 'immutable';
 
 const initialState = fromJS({
-  search: {},
-  album: {},
+  search: {
+    albums: {
+      entities: {},
+      total: 0,
+    },
+    tracks: {
+      entities: {},
+      total: 0,
+    },
+  },
+  albumTracks: {},
   track: {},
 });
 
-function searchReducer(state = initialState.get('search'), action = {}) {
+function searchTotalAlbumReducer(state = initialState.get('search').get('albums').get('total'), action = {}) {
   switch (action.type) {
-    case 'SET_SEARCH':
-      return state.set('result', map(action.payload));
+    case 'SET_ALBUM_SEARCH':
+      return action.payload.albums.total;
     default:
       return state;
   }
 }
 
-function albumReducer(state = initialState.get('album'), action = {}) {
+function searchAlbumsReducer(state = initialState.get('search').get('albums').get('entities'), action = {}) {
   switch (action.type) {
-    case 'SET_ALBUM':
-      return state.set(action.payload.id, map(action.payload));
+    case 'SET_ALBUM_SEARCH':
+      return action.payload.albums.items
+        .reduce(
+          (albums, album) => albums.set(album.id, map(album)),
+          state,
+        );
     default:
       return state;
   }
 }
 
-function trackReducer(state = initialState.get('track'), action = {}) {
+const searchAlbumReducer = combineReducers({
+  total: searchTotalAlbumReducer,
+  entities: searchAlbumsReducer,
+});
+
+function searchTotalTrackReducer(state = initialState.get('search').get('tracks').get('total'), action = {}) {
   switch (action.type) {
-    case 'SET_TRACK':
-      return state.set(action.payload.id, map(action.payload));
+    case 'SET_TRACK_SEARCH':
+      return action.payload.tracks.total;
+    default:
+      return state;
+  }
+}
+
+function searchTracksReducer(state = initialState.get('search').get('tracks').get('entities'), action = {}) {
+  switch (action.type) {
+    case 'SET_TRACK_SEARCH':
+      return action.payload.tracks.items
+        .reduce(
+          (tracks, track) => tracks.set(track.id, map(track)),
+          state,
+        );
+    default:
+      return state;
+  }
+}
+
+const searchTrackReducer = combineReducers({
+  total: searchTotalTrackReducer,
+  entities: searchTracksReducer,
+});
+
+const searchReducer = combineReducers({
+  albums: searchAlbumReducer,
+  tracks: searchTrackReducer,
+});
+
+function albumTrackReducer(state = initialState.get('albumTracks'), action = {}) {
+  switch (action.type) {
+    case 'SET_ALBUM_TRACKS':
+      return action.payload.items
+        .reduce(
+          (tracks, track) => tracks.set(track.id, map(track)),
+          state,
+        );
     default:
       return state;
   }
@@ -42,8 +96,7 @@ function trackReducer(state = initialState.get('track'), action = {}) {
 
 const reducer = combineReducers({
   search: searchReducer,
-  album: albumReducer,
-  track: trackReducer,
+  albumTracks: albumTrackReducer,
 });
 
 export default reducer;

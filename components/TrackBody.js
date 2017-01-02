@@ -2,6 +2,7 @@
  * Created by miguhruiz on 27/12/16.
  */
 import React, { PropTypes } from 'react';
+import Link from 'next/link';
 
 const styles = {
   noLinks: {
@@ -17,11 +18,11 @@ const styles = {
 
 function TrackBody(props) {
   return (
-    <a href={`/track?q=${props.id}`} style={styles.noLinks}>
+    <Link href={`/track?q=${props.id}`} style={styles.noLinks}>
       <li style={styles.separate}>
         {props.track_number}.<b style={styles.songName}>{props.name}</b>
       </li>
-    </a>
+    </Link>
   );
 }
 

@@ -3,7 +3,6 @@
  */
 import React, { PropTypes } from 'react';
 import ms from 'ms';
-import Link from 'next/link';
 import Material from 'material-ui/styles/MuiThemeProvider';
 import Head from 'next/head';
 import { connect } from 'react-redux';
@@ -40,7 +39,6 @@ class TrackPage extends React.Component {
     };
   }
   async componentDidMount() {
-    await this.props.actions.loadTrack(this.state.id);
     this.setState({ loading: false });
   }
   render() {
@@ -69,13 +67,7 @@ class TrackPage extends React.Component {
             }
             <div className="Track-extra" style={{ display: 'flex', justifyContent: 'center', marginBottom: '1em', flexWrap: 'wrap' }}>
               <Chip className="Track-author" style={styles.separateChips}>De: {this.props.track.get('artists')[0].name}</Chip>
-              <Chip className="Track-popularity" style={styles.separateChips}>Popularidad: <b>{this.props.track.get('popularity')}%</b></Chip>
               <Chip className="Track-duration" style={styles.separateChips}><b>{ms(this.props.track.get('duration_ms'), { long: true }).split(' ')[0]} minutos aproximadamente</b></Chip>
-              <Chip className="Track-extra" style={styles.separateChips}>N. {this.props.track.get('track_number')} del álbum
-                <Link href={`/album?q=${this.props.track.get('album').id}`}>
-                  {` ${this.props.track.get('album').name}`}
-                </Link>
-              </Chip>
             </div>
             <audio
               className="Track-preview"
@@ -92,13 +84,12 @@ class TrackPage extends React.Component {
 
 TrackPage.propTypes = {
   id: PropTypes.string,
-  actions: PropTypes.shape(PropTypes.func),
   track: PropTypes.instanceOf(Immutable.List),
 };
 
 function mapStateToProps(state, props) {
   return {
-    track: state.get('track').get(props.id),
+    track: state.get('albumTracks').get(props.id) || state.get('search').get('tracks').get('entities').get(props.id),
   };
 }
 

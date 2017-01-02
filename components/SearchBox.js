@@ -46,7 +46,8 @@ class SearchBox extends React.Component {
       e.blur();
 
       const query = e.value;
-      await this.props.actions.setSearch(query);
+      await this.props.actions.setSearchAlbum(query);
+      await this.props.actions.setSearchTrack(query);
 
       this.setState({ searchResult: true });
     }
@@ -63,35 +64,35 @@ class SearchBox extends React.Component {
         />
         {this.state.searchResult && (
           <SearchCounter
-            albums={this.props.search.get('albums').total}
-            tracks={this.props.search.get('tracks').total}
+            albums={this.props.search.get('albums').get('total')}
+            tracks={this.props.search.get('tracks').get('total')}
           />
         )}
         <div className="albums" style={styles.root}>
 
           { this.state.searchResult &&
-            this.props.search.get('albums').items.length > 0 && (
+            this.props.search.get('albums').get('total') > 0 && (
               <GridList style={styles.gridList} cols={2.2}>
                 {
-                  this.props.search.get('albums').items.map(
+                  this.props.search.get('albums').get('entities').map(
                     (album) => {
-                      return <SearchResult {...album} />;
+                      return <SearchResult {...album.toJS()} />;
                     },
-                  )
+                  ).toArray()
                 }
               </GridList>
           )}
         </div>
         <section className="tracks">
           { this.state.searchResult > 0 &&
-            this.props.search.get('tracks').items.length > 0 && (
+            this.props.search.get('tracks').get('total') > 0 && (
               <GridList style={styles.gridList} cols={2.2}>
                 {
-                  this.props.search.get('tracks').items.map(
+                  this.props.search.get('tracks').get('entities').map(
                     (track) => {
-                      return <SearchResult {...track} />;
+                      return <SearchResult {...track.toJS()} />;
                     },
-                  )
+                  ).toArray()
                 }
               </GridList>
           )}
@@ -108,7 +109,7 @@ SearchBox.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    search: state.get('search').get('result'),
+    search: state.get('search'),
   };
 }
 

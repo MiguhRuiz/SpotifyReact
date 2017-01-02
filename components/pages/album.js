@@ -37,7 +37,7 @@ class AlbumPage extends React.Component {
     };
   }
   async componentDidMount() {
-    await this.props.actions.loadAlbum(this.state.id);
+    await this.props.actions.setAlbumTracks(this.state.id);
     this.setState({ loading: false });
   }
   render() {
@@ -64,7 +64,7 @@ class AlbumPage extends React.Component {
               className="Album-cover"
               overlay={<CardTitle
                 title={this.props.album.get('name')}
-                subtitle={`Por ${this.props.album.get('artists')[0].name}; Popularidad: ${this.props.album.get('popularity')}%`}
+                subtitle={`Por ${this.props.album.get('artists')[0].name}; `}
               />}
               style={styles.card}
             >
@@ -73,13 +73,13 @@ class AlbumPage extends React.Component {
             <div className="Album-details">
               <ul className="Album-tracks" style={styles.noDecorationList}>
                 <h2>Este álbum incluye...</h2>
-                {
-                  this.props.album.get('tracks').items.map(
-                    (track) => {
-                      return <TrackBody {...track} />;
-                    },
-                  )
-                }
+                { this.props.albumTracks && (
+                  this.props.albumTracks.map(
+                  (track) => {
+                    return <TrackBody {...track.toJS()} />;
+                  },
+                  ).toArray()
+                )}
               </ul>
             </div>
           </div>
@@ -93,6 +93,7 @@ AlbumPage.propTypes = {
   id: PropTypes.string,
   actions: PropTypes.shape(PropTypes.func),
   album: PropTypes.instanceOf(Immutable.List),
+  albumTracks: PropTypes.instanceOf(Immutable.List),
 };
 
 AlbumPage.defaultProps = {
@@ -101,7 +102,8 @@ AlbumPage.defaultProps = {
 
 function mapStateToProps(state, props) {
   return {
-    album: state.get('album').get(props.id),
+    album: state.get('search').get('albums').get('entities').get(props.id),
+    albumTracks: state.get('albumTracks'),
   };
 }
 
