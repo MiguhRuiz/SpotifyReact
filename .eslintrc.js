@@ -21,6 +21,7 @@ module.exports = {
         "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
         "import/extensions": [0, {".jsx": "always"}],
         "arrow-body-style": [0, ["error", "as-needed"]],
-        "react/no-did-mount-set-state": [0, ['disallow-in-func']]
+        "react/no-did-mount-set-state": [0, ['disallow-in-func']],
+        "no-underscore-dangle": ["error",  { "allow": ["__REDUX_DEVTOOLS_EXTENSION_COMPOSE__"] }]
     }
 };
