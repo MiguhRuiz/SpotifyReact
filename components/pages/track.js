@@ -35,7 +35,6 @@ class TrackPage extends React.Component {
     super(props);
     this.state = {
       loading: true,
-      id: props.id,
     };
   }
   async componentDidMount() {
@@ -83,7 +82,6 @@ class TrackPage extends React.Component {
 }
 
 TrackPage.propTypes = {
-  id: PropTypes.string,
   track: PropTypes.instanceOf(Immutable.List),
 };
 
