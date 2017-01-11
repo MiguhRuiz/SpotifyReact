@@ -40,12 +40,12 @@ class SearchBox extends React.Component {
 
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-  async handleSubmit(ev) {
-    if (ev.charCode === 13) {
-      const e = document.getElementById('search-box');
-      e.blur();
+  async handleSubmit(event) {
+    if (event.charCode === 13) {
+      const element = document.getElementById('search-box');
+      element.blur();
 
-      const query = e.value;
+      const query = element.value;
       await this.props.actions.setSearchAlbum(query);
       await this.props.actions.setSearchTrack(query);
 
