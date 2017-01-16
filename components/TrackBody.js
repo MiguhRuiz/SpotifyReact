@@ -18,10 +18,12 @@ const styles = {
 
 function TrackBody(props) {
   return (
-    <Link href={`/track?q=${props.id}`} style={styles.noLinks}>
-      <li style={styles.separate}>
-        {props.track_number}.<b style={styles.songName}>{props.name}</b>
-      </li>
+    <Link href={`/track?q=${props.id}`}>
+      <a style={styles.noLinks}>
+        <li style={styles.separate}>
+          {props.track_number}.<b style={styles.songName}>{props.name}</b>
+        </li>
+      </a>
     </Link>
   );
 }
