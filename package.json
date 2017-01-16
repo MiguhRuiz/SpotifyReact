@@ -1,6 +1,6 @@
 {
   "name": "spotify-react",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "An Spotify React application created with educational purposes",
   "main": "index.js",
   "scripts": {
