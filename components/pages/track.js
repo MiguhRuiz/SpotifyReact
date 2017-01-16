@@ -87,7 +87,7 @@ TrackPage.propTypes = {
 
 function mapStateToProps(state, props) {
   return {
-    track: state.get('albumTracks').get(props.id) || state.get('search').get('tracks').get('entities').get(props.id),
+    track: state.get('search').get('tracks').get('entities').get(props.id) || state.get('albumTracks').findEntry(track => track.get('id') === props.id)[1],
   };
 }
 

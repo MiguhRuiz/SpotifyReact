@@ -86,7 +86,7 @@ function albumTrackReducer(state = initialState.get('albumTracks'), action = {})
     case 'SET_ALBUM_TRACKS':
       return action.payload.items
         .reduce(
-          (tracks, track) => tracks.set(track.id, map(track)),
+          (tracks, track) => tracks.set(track.track_number, map(track)),
           state,
         );
     default:
